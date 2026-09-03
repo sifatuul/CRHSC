@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রিসাইকেল প্রণালি - Final Optimized Theme</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+	    
+
+    <style>
+        /* CSS Variables for Clean White & Purple Theme */
+        :root {
+            --bg-page: #fdfbf8;           
+            --bg-container: #ffffff;      
+            --box-bg: #f9f2ff;            
+            --border-purple: #9c27b0;     
+            --text-dark-purple: #38006b;  
+            --arrow-color: #8e24aa;       
+            --title-color: #5e138a;       
+            --shadow-color: rgba(156, 39, 176, 0.15); 
+        }
+
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tiro Bangla', serif; 
+            background-color: var(--bg-page);
+            min-height: 100vh;
+            padding: 30px 15px;
+            color: var(--text-dark-purple);
+        }
+
+        .english-text {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1250px; /* Increased to comfortably fit larger, bolder texts */
+            margin: 0 auto;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 2.8rem; /* Bigger title */
+            margin-bottom: 35px;
+            color: var(--title-color);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .chart-container {
+            background-color: var(--bg-container);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            border: 1px solid #f3e5f5;
+            border-top: 6px solid var(--border-purple);
+            padding: 25px 20px; /* Reduced extra blank space */
+            margin-bottom: 35px;
+            overflow: hidden; 
+        }
+
+        .chart-title {
+            text-align: center;
+            font-size: 1.6rem; /* Bigger and bolder */
+            font-weight: bold;
+            color: var(--title-color);
+            margin-top: 20px; /* Reduced spacing */
+            padding-top: 15px;
+            border-top: 1.5px dashed #e1bee7;
+        }
+
+        .flow-layout {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 5px; /* Added slight gap for better distribution */
+        }
+
+        .mid-row {
+            padding: 10px 60px; /* Significantly reduced vertical blank space */
+        }
+
+        .box {
+            background-color: var(--box-bg);
+            color: var(--text-dark-purple);
+            border: 2px solid var(--border-purple); /* Thicker border */
+            border-radius: 8px;
+            padding: 12px 8px; 
+            text-align: center;
+            font-size: 1.25rem; /* Noticeably larger text */
+            font-weight: 500;  /* Bold text for clearer view */
+            max-width: 195px;   /* Adjusted width for bigger text */
+            min-width: 85px;
+            line-height: 1.35;
+            flex: 1 1 0; 
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-2px); /* Slight interactive feel */
+        }
+
+        .arrow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 35px;
+        }
+
+        .arrow-text {
+            font-size: 1.05rem; /* Larger and bolder arrow labels */
+            font-weight: bold;
+            color: #555;
+            margin-bottom: -5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .arrow-symbol {
+            font-size: 1.8rem; /* Bigger arrows */
+            color: var(--arrow-color);
+            font-weight: bold;
+        }
+
+        .mid-arrow {
+            font-size: 2.2rem; /* Much larger loop arrows */
+            color: var(--arrow-color);
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        /* Responsive Adjustments for Mobile */
+        @media (max-width: 850px) {
+            .box { font-size: 1.05rem; padding: 8px 5px; border-width: 1.5px; } 
+            .arrow-text { font-size: 0.85rem; white-space: normal; line-height: 1.1; margin-bottom: -2px; } 
+            .arrow-symbol { font-size: 1.4rem; } 
+            .mid-arrow { font-size: 1.8rem; } 
+            .chart-container { padding: 20px 10px; }
+            .mid-row { padding: 10px 30px; }
+            .page-title { font-size: 2.2rem; margin-bottom: 25px; }
+            .chart-title { font-size: 1.3rem; margin-top: 15px; padding-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="page-title">কয়েকটি রিসাইকেল পদ্ধতির প্রবাহচিত্র</h1>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">লোহার টুকরা ও স্ক্র্যাপ সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">কাটার মেশিন</span><span class="arrow-symbol">→</span></div>
+                <div class="box">টুকরা লোহা</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">পৃথকীকরণ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">বিগলন</div>
+            </div>
+            <div class="row mid-row">
+                <div class="mid-arrow">↑</div>
+                <div class="mid-arrow">↓</div>
+            </div>
+            <div class="row">
+                <div class="box">বর্জ্য লোহা</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার দ্রব্য</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">আয়রন সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">প্রক্রিয়াকরণ</div>
+            </div>
+        </div>
+        <div class="chart-title">আয়রন রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">পরিত্যক্ত অ্যালুমিনিয়াম</div>
+                <div class="arrow-wrapper"><span class="arrow-text">চাপ প্রয়োগ</span><span class="arrow-symbol">→</span></div>
+                <div class="box">ক্ষুদ্রকরণ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">প্রাকৃতি গ্যাস<br><span class="english-text">700°C</span></span><span class="arrow-symbol">→</span></div>
+                <div class="box">বিগলন</div>
+                <div class="arrow-wrapper"><span class="arrow-text english-text">700°C</span><span class="arrow-symbol">→</span></div>
+                <div class="box">তরলীকরণ</div>
+            </div>
+            <div class="row mid-row" style="justify-content: flex-end; padding-right: 60px;">
+                <div class="arrow-wrapper">
+                    <span class="arrow-text">ইনগোন্ড অ্যালুমিনিয়াম<br>যোগ করা</span>
+                    <span class="mid-arrow">↓</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box" style="visibility: hidden;">Placeholder</div>
+                <div class="arrow-wrapper" style="visibility: hidden;"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার উপযোগী অ্যালুমিনিয়াম</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ছাঁচে বার বা পাত তৈরি করা</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">অপদ্রব্য অপসারণ</div>
+            </div>
+        </div>
+        <div class="chart-title">অ্যালুমিনিয়াম রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">স্ক্র্যাপ সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">কাটার মেশিন</span><span class="arrow-symbol">→</span></div>
+                <div class="box">টুকরা কপার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">ধৌতকরণ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">প্লাস্টিক জাতীয় পদার্থ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">লোহা অপসারণ</div>
+            </div>
+            <div class="row mid-row">
+                <div class="mid-arrow">↑</div>
+                <div class="mid-arrow">↓</div>
+            </div>
+            <div class="row">
+                <div class="box">বর্জ্য <span class="english-text">Cu</span></div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">উপকরণ তৈরি</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box"><span class="english-text">Cu</span> ধাতুর বিলেট</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">বিগলিত <span class="english-text">Cu</span> ধাতু সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">চুল্লীতে বিগলন</div>
+            </div>
+        </div>
+        <div class="chart-title">কপার রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">ভাঙা কাচ সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">ধৌতকরণ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">কুলেট তৈরি</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">ট্যাঙ্ক</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">বিগলন</div>
+            </div>
+            <div class="row mid-row">
+                <div class="mid-arrow">↑</div>
+                <div class="mid-arrow">↓</div>
+            </div>
+            <div class="row">
+                <div class="box">ব্যবহার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">কাচের দ্রব্য</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">আকৃতি প্রদান</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">শীতলীকরণ</div>
+            </div>
+        </div>
+        <div class="chart-title">কাচ রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">কাগজ সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">কাটার মেশিন</span><span class="arrow-symbol">→</span></div>
+                <div class="box">টুকরা কাগজ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">পানির ট্যাংক</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">অপদ্রব্য অপসারণ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">রিফাইনিং চেম্বার</div>
+            </div>
+            <div class="row mid-row">
+                <div class="mid-arrow">↑</div>
+                <div class="mid-arrow">↓</div>
+            </div>
+            <div class="row">
+                <div class="box">বর্জ্য কাগজ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">পেপার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">সাদা নিউজপ্রিন্ট</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">পরিষ্কার পেস্ট</div>
+                <div class="arrow-wrapper"><span class="arrow-text english-text">Ca(OCl)Cl</span><span class="arrow-symbol">←</span></div>
+                <div class="box">পেস্ট</div>
+            </div>
+        </div>
+        <div class="chart-title">কাগজ রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="flow-layout">
+            <div class="row">
+                <div class="box">প্লাস্টিক সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">ধৌতকরণ</span><span class="arrow-symbol">→</span></div>
+                <div class="box">কাদামাটি, লেবেল, ধাতব দ্রব্য অপসারণ</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">পরিষ্কার প্লাস্টিকের টুকরা</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">→</span></div>
+                <div class="box">পৃথকীকরণ</div>
+            </div>
+            <div class="row mid-row">
+                <div class="mid-arrow">↑</div>
+                <div class="mid-arrow">↓</div>
+            </div>
+            <div class="row">
+                <div class="box">বর্জ্য প্লাস্টিক</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ব্যবহার</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">প্লাস্টিক দ্রব্য তৈরি</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">ছোট দানা সংগ্রহ</div>
+                <div class="arrow-wrapper"><span class="arrow-text">কাটিং</span><span class="arrow-symbol">←</span></div>
+                <div class="box">পেসার মেশিন</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">গলন</div>
+                <div class="arrow-wrapper"><span class="arrow-symbol">←</span></div>
+                <div class="box">টুকরাকরণ</div>
+            </div>
+        </div>
+        <div class="chart-title">প্লাস্টিক রিসাইকেল প্রণালির প্রবাহচিত্র</div>
+    </div>
+
+</div>
+
+</body>
+</html>
