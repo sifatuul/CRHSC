@@ -1,6 +1,6 @@
 // --- CONFIGURATION ---
-const USERNAME = 'YOUR_GITHUB_USERNAME'; // e.g., 'atikul-islam'
-const REPO = 'YOUR_REPO_NAME';           // e.g., 'trsp-chemistry-assets'
+const USERNAME = 'sifatuul'; 
+const REPO = 'CRHSC';           
 const BRANCH = 'main';                   
 
 // --- DOM ELEMENTS ---
