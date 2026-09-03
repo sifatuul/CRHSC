@@ -1,0 +1,145 @@
+/* Load your custom font */
+@font-face {
+    font-family: 'CustomBanglaFont';
+    src: url('font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'CustomBanglaFont', 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Force normal weight on absolutely everything to prevent weird font stretching */
+body, h1, h2, h3, h4, h5, h6, strong, b, button, a {
+    font-weight: normal !important;
+}
+
+body {
+    background-color: #f4f4f9; 
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #4a148c; 
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #7c43bd; 
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #7c43bd; 
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.sidebar li:hover, .sidebar li.active {
+    background-color: #1976d2; 
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+#chapter-title {
+    color: #4a148c;
+    border-bottom: 2px solid #e3f2fd;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+h3 {
+    color: #1976d2;
+    margin-top: 20px;
+    font-size: 1.3rem;
+}
+
+.doc-list {
+    list-style: none;
+    margin-bottom: 40px;
+    margin-top: 15px;
+}
+
+.doc-list li {
+    margin-bottom: 10px;
+}
+
+.doc-list a {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #e8eaf6; 
+    color: #283593; 
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.doc-list a:hover {
+    background-color: #c5cae9;
+    transform: translateX(5px);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.image-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    background-color: #fafafa;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.image-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.copy-btn {
+    background-color: #1976d2; 
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background-color: #4a148c; 
+}
