@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>বুক প্রজেক্ট অ্যাসেটস</title>
+    <title>রাসায়নিক বিক্রিয়া - HSC V2026</title>
+    <!-- FontAwesome Library for File Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Sidebar for Chapters -->
         <aside class="sidebar">
             <h2>অধ্যায়সমূহ</h2>
             <ul id="chapter-list">
-                </ul>
+                <!-- Chapters injected here via JS -->
+            </ul>
         </aside>
 
+        <!-- Main Content Area -->
         <main class="content">
             <h1 id="chapter-title">একটি অধ্যায় নির্বাচন করুন</h1>
             
             <div id="assets-container" style="display: none;">
                 <h3>ডকুমেন্ট এবং সোর্স ফাইল</h3>
+                <!-- Changed to support Grid layout -->
                 <ul id="document-list" class="doc-list">
-                    </ul>
+                    <!-- Docs injected here -->
+                </ul>
 
                 <h3>ছবি গ্যালারি</h3>
                 <div id="image-gallery" class="gallery">
-                    </div>
+                    <!-- Images injected here -->
+                </div>
             </div>
         </main>
     </div>

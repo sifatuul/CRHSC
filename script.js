@@ -2,7 +2,7 @@
 const USERNAME = 'sifatuul'; 
 const REPO = 'CRHSC';           
 const BRANCH = 'main';                   
-const CHAPTER_PASSWORD = 'CRHSC2026'; // Your password
+const CHAPTER_PASSWORD = 'CRHSC2026'; 
 
 // --- DOM ELEMENTS ---
 const chapterList = document.getElementById('chapter-list');
@@ -13,6 +13,29 @@ const imageGallery = document.getElementById('image-gallery');
 
 // Base API URL
 const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents`;
+
+// --- 24-HOUR PASSWORD LOGIC ---
+function isAuthenticated() {
+    const lastAuthStr = localStorage.getItem('crhsc_auth_time');
+    const now = Date.now();
+    const twentyFourHours = 24 * 60 * 60 * 1000; // milliseconds in 24 hours
+
+    // If logged in within the last 24 hours, allow access
+    if (lastAuthStr && (now - parseInt(lastAuthStr)) < twentyFourHours) {
+        return true; 
+    }
+
+    // Otherwise, ask for password
+    const userInput = prompt("এই অধ্যায়টি দেখতে পাসওয়ার্ড দিন:");
+    if (userInput === CHAPTER_PASSWORD) {
+        // Save the current timestamp to LocalStorage
+        localStorage.setItem('crhsc_auth_time', now.toString());
+        return true;
+    } else {
+        alert("ভুল পাসওয়ার্ড! অ্যাক্সেস ডিনাইড।");
+        return false;
+    }
+}
 
 // 1. FETCH ALL CHAPTER FOLDERS ON LOAD
 async function fetchChapters() {
@@ -44,12 +67,8 @@ async function fetchChapters() {
 
 // 2. LOAD FILES & DYNAMIC IMAGE FOLDERS FOR A SPECIFIC CHAPTER
 async function loadChapterContents(chapterName, chapterPath, listElement) {
-    // --- PASSWORD PROTECTION ---
-    const userInput = prompt("এই অধ্যায়টি দেখতে পাসওয়ার্ড দিন:");
-    if (userInput !== CHAPTER_PASSWORD) {
-        alert("ভুল পাসওয়ার্ড! অ্যাক্সেস ডিনাইড।");
-        return; // Stop execution if password is wrong
-    }
+    // Check password before proceeding
+    if (!isAuthenticated()) return;
 
     // UI Updates
     document.querySelectorAll('.sidebar li').forEach(el => el.classList.remove('active'));
@@ -65,26 +84,48 @@ async function loadChapterContents(chapterName, chapterPath, listElement) {
         const chapterContents = await chapterResponse.json();
 
         const docs = [];
-        const subDirs = []; // Array to hold all subfolders
+        const subDirs = []; 
 
-        // Separate files and subdirectories
+        // Separate files and subdirectories (Show ALL files now)
         chapterContents.forEach(item => {
-            if (item.type === 'file' && (item.name.endsWith('.pdf') || item.name.endsWith('.docx') || item.name.endsWith('.ai'))) {
+            if (item.type === 'file') {
                 docs.push(item);
             } else if (item.type === 'dir') {
                 subDirs.push(item);
             }
         });
 
-        // Render Documents
+        // Render Documents in Grid Layout with Icons
         documentList.innerHTML = '';
         if (docs.length === 0) {
-            documentList.innerHTML = '<li>এই ফোল্ডারে কোনো ডকুমেন্ট পাওয়া যায়নি।</li>';
+            documentList.innerHTML = '<li style="grid-column: 1 / -1;">এই ফোল্ডারে কোনো ডকুমেন্ট পাওয়া যায়নি।</li>';
         } else {
             docs.forEach(doc => {
                 const li = document.createElement('li');
                 const downloadUrl = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${doc.path}`;
-                li.innerHTML = `<a href="${downloadUrl}" target="_blank" download>${doc.name}</a>`;
+                const lowerName = doc.name.toLowerCase();
+                
+                // Determine Icon and Styling based on file extension
+                let iconClass = "fa-solid fa-file icon-default";
+                let cardStyle = "doc-card";
+
+                if (lowerName.endsWith('.pdf')) {
+                    iconClass = "fa-solid fa-file-pdf icon-pdf";
+                } else if (lowerName.endsWith('.doc') || lowerName.endsWith('.docx')) {
+                    iconClass = "fa-solid fa-file-word icon-word";
+                } else if (lowerName.endsWith('.ai')) {
+                    iconClass = "fa-solid fa-pen-nib icon-ai"; 
+                } else if (lowerName.endsWith('.zip') || lowerName.endsWith('.rar')) {
+                    iconClass = "fa-solid fa-file-zipper";
+                    cardStyle = "doc-card master-file"; // Apply exclusive zip styling
+                }
+
+                li.innerHTML = `
+                    <a href="${downloadUrl}" target="_blank" download class="${cardStyle}">
+                        <i class="${iconClass}"></i>
+                        <span>${doc.name}</span>
+                    </a>
+                `;
                 documentList.appendChild(li);
             });
         }
@@ -92,25 +133,21 @@ async function loadChapterContents(chapterName, chapterPath, listElement) {
         // Render Images from ALL Subdirectories
         imageGallery.innerHTML = '';
         if (subDirs.length === 0) {
-            imageGallery.innerHTML = '<p>এই অধ্যায়ে কোনো ছবির ফোল্ডার পাওয়া যায়নি।</p>';
+            imageGallery.innerHTML = '<p style="grid-column: 1 / -1;">এই অধ্যায়ে কোনো ছবির ফোল্ডার পাওয়া যায়নি।</p>';
         } else {
             let foundAnyImages = false;
 
-            // Loop through every folder found inside the chapter
             for (const dir of subDirs) {
                 const dirResponse = await fetch(`${apiUrl}/${encodeURIComponent(dir.path)}`);
                 const dirContents = await dirResponse.json();
 
                 const images = dirContents.filter(item => item.name.match(/\.(png|jpg|jpeg|gif|svg)$/i));
 
-                // Only create a section if this specific folder actually contains images
                 if (images.length > 0) {
                     foundAnyImages = true;
 
-                    // Create Folder Name Heading
                     const folderHeading = document.createElement('h4');
                     folderHeading.textContent = `ফোল্ডার: ${dir.name}`;
-                    // Apply inline styling to make it span across the CSS grid beautifully
                     folderHeading.style.gridColumn = '1 / -1'; 
                     folderHeading.style.marginTop = '15px';
                     folderHeading.style.paddingBottom = '5px';
@@ -119,7 +156,6 @@ async function loadChapterContents(chapterName, chapterPath, listElement) {
                     folderHeading.style.fontSize = '1.1rem';
                     imageGallery.appendChild(folderHeading);
 
-                    // Add images for this specific folder
                     images.forEach(img => {
                         const imgUrl = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${img.path}`;
                         const card = document.createElement('div');
@@ -134,15 +170,14 @@ async function loadChapterContents(chapterName, chapterPath, listElement) {
                 }
             }
 
-            // Fallback if folders exist but none of them contain image files
             if (!foundAnyImages) {
-                imageGallery.innerHTML = '<p>ফোল্ডারগুলোতে কোনো ছবি পাওয়া যায়নি।</p>';
+                imageGallery.innerHTML = '<p style="grid-column: 1 / -1;">ফোল্ডারগুলোতে কোনো ছবি পাওয়া যায়নি।</p>';
             }
         }
 
     } catch (error) {
         console.error(error);
-        documentList.innerHTML = '<li style="color:#d32f2f;">ফাইলের তথ্য লোড করতে সমস্যা হয়েছে।</li>';
+        documentList.innerHTML = '<li style="color:#d32f2f; grid-column: 1 / -1;">ফাইলের তথ্য লোড করতে সমস্যা হয়েছে।</li>';
         imageGallery.innerHTML = '';
     }
 }
